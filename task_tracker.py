@@ -116,6 +116,12 @@ def done_task(id):
 #================================ Helpful functions =============================
 def get_task(id):
     return next((t for t in tasks if t["id"] == id), None)
+
+#=========================== clear the list =============================
+@click.command(name='clr')
+def clear_tasks():
+    tasks=[]
+    save_tasks(tasks)
 # ================================ CLI instructions =============================
 cli.add_command(add_task)
 cli.add_command(list_tasks)
@@ -123,6 +129,7 @@ cli.add_command(delete_task)
 cli.add_command(update_task)
 cli.add_command(inprogress_task)
 cli.add_command(done_task)
+cli.add_command(clear_tasks)
 
 if __name__ == "__main__":
     cli()
