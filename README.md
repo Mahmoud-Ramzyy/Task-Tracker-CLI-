@@ -2,6 +2,11 @@
 
 A simple command-line task tracker built with Python and Click. This application allows users to manage tasks directly from the terminal by adding, updating, deleting, listing, and tracking task progress. All tasks are stored locally in a JSON file for persistence between sessions.
 
+## Project Page
+
+Challenge: https://roadmap.sh/projects/task-tracker
+Repository: https://github.com/Mahmoud-Ramzyy/Task-Tracker-CLI-.git
+
 ## Features
 
 * Add new tasks
