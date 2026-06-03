@@ -32,7 +32,7 @@ def add_task(t):
     '''Add tasks here:'''
     count = tasks[-1]["id"] + 1 if tasks else 1 # get the last task number
     
-    current= datetime.now().strftime("%Y-%m-%D %H:%M:%S")
+    current= datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     task={"id":count, "task":t,
             "status":"todo",
@@ -40,7 +40,7 @@ def add_task(t):
             "updatedAt":None}
     tasks.append(task)
     save_tasks(tasks)
-    print(f"Task added successfully (ID: {count})")
+    click.echo(f"Task added successfully (ID: {count})")
     
 #========================= list function ============================
 @click.command(name='list')
@@ -48,16 +48,16 @@ def add_task(t):
 def list_tasks(st=None):
     '''List all the required tasks details'''
     if not tasks:
-        print("No tasks yet")
+        click.echo("No tasks yet")
         return
     for task in tasks:
         if st is None or task['status'] == st:
-            print("         -------------------------------")
-            print(f"Task{task['id']}: {task['task']}")
-            print(f'status:{task["status"]}')
-            print(f'Created at: {task["createdAt"]}')
+            click.echo("         -------------------------------")
+            click.echo(f"Task{task['id']}: {task['task']}")
+            click.echo(f'status:{task["status"]}')
+            click.echo(f'Created at: {task["createdAt"]}')
             if task["updatedAt"]:
-                print(f'Updated at: {task["updatedAt"]}')
+                click.echo(f'Updated at: {task["updatedAt"]}')
 
 #========================= Delete function  ============================
 @click.command(name='del')
@@ -69,7 +69,7 @@ def delete_task(id):
         tasks.remove(task)
         save_tasks(tasks)
     else:
-        print("Task not found")
+        click.echo("Task not found")
 
 #============================ Update function ======================================
 @click.command(name='update')
@@ -85,7 +85,7 @@ def update_task(id,task):
             save_tasks(tasks)  # update the json file 
             break
     else:
-        print("there's no such task in the list")
+        click.echo("there's no such task in the list")
 
 #================================ Mark functions ======================
 @click.command(name='mark-in-progress')
@@ -99,7 +99,7 @@ def inprogress_task(id):
             save_tasks(tasks)  # update the json file 
             break
     else:
-        print("there's no such task in the list")
+        click.echo("there's no such task in the list")
                 #=======================================================
 @click.command(name='mark-done')
 @click.argument('id',type=int)
@@ -112,7 +112,7 @@ def done_task(id):
             save_tasks(tasks)  # update the json file 
             break
     else:
-        print("there's no such task in the list")
+        click.echo("there's no such task in the list")
 #================================ Helpful functions =============================
 def get_task(id):
     return next((t for t in tasks if t["id"] == id), None)
@@ -120,6 +120,7 @@ def get_task(id):
 #=========================== clear the list =============================
 @click.command(name='clr')
 def clear_tasks():
+    global tasks
     tasks=[]
     save_tasks(tasks)
 # ================================ CLI instructions =============================
